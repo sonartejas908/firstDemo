@@ -8,3 +8,4 @@ then
 echo $num1 is grater than $num2
 else 
 echo $num1 is less than $num2
+fi
