@@ -7,7 +7,7 @@ do
 		((T+=1))
 done
 echo "Random Array: ${array[@]}"
-sorted=($(printf '%s\n' "${array[@]}"|sort))
+sorted=($(printf '%s\n' "${array[@]}"|sort ))
 echo "Sorted Array: ${sorted[@]}"
 echo 2nd smallest number is ${sorted[1]}
 echo 2nd largest number is ${sorted[8]}

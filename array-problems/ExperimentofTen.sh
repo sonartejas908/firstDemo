@@ -1,18 +1,19 @@
-#!/bin/bash -x
+#!/bin/bash
 
-for ((i=1; i<=10; i++))
+for ((i=0; i<=9; i++))
 do
    A=$((RANDOM%889 + 100))
-   array[T]=$A
-      ((T+=1))
+   array[$i]=$A
 done
 
-echo "${array[@]}"
-
+echo Array Generated : "${array[@]}"
+B=1
+D=9
+function checkbig() {
 T=2
 first=${array[0]}
 second=${array[1]}
-for ((i=1; i<=9; i++))
+for ((i=$B; i<=$D; i++))
 do
 	if [ $first -gt $second ]
    then
@@ -26,11 +27,16 @@ do
 done
 remb=$first
 echo Biggest number is $first
+}
+checkbig
+B=1
+D=9
+function checksmall() {
 
 T=2
 first=${array[0]}
 second=${array[1]}
-for ((i=1; i<=9; i++))
+for ((i=$B; i<=$D; i++))
 do
    if [ $first -lt $second ]
    then
@@ -44,13 +50,17 @@ do
 done
 rems=$first
 echo Smallest number is $first
+}
 
+checksmall
 
 for ((i=0; i<=9; i++))
 do
-	if [ $remb -eq ${array[i]}  ]
+	if [ $remb -eq ${array[$i]}  ]
 		then
-		unset array[i]
+		unset array[$i]
+		array=($(printf '%s\n' "${array[@]}"| sort ))
+		break
 	fi
 done
 echo After removing Biggest : ${array[@]}
@@ -59,7 +69,14 @@ do
    if [ $rems -eq ${array[i]}  ]
       then
       unset array[i]
+		array=($(printf '%s\n' "${array[@]}"| sort ))
+		break
    fi
 done
 echo After removing Smallest : ${array[@]}
+echo Second
 
+B=0
+D=6
+checkbig
+checksmall
